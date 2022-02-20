@@ -24,7 +24,7 @@ public class App {
         DexService dexService = new DexService(pokedex);
         SearchFormService sfService = new SearchFormService();
 
-        NewTest nt = new NewTest();
+//        NewTest nt = new NewTest();
 
         Tomcat server = new Tomcat();
         server.getConnector();
