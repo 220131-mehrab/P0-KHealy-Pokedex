@@ -4,7 +4,10 @@
 
 package com.revature.khealy;
 
+
 import java.lang.System;
+
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,10 +36,20 @@ public class AppTest {
                 .setTotal(634).setHP(78).setAtk(104).setDef(78).setSpAtk(159).setSpDef(115).setSpDef(100)
                 .setSpecies("Flame Pokémon").setHeight("1.7 m").setWeight("100.5 kg").build();
 
+
+
         System.out.println(tempPokemon1.toString());
+        System.out.println("7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg");
         System.out.println(tempPokemon2.toString());
         System.out.println(tempPokemon3.toString());
 
-        //Assertions.assertEquals(tempPokemon1.equals("7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg"), true);
+        
+        String poke = new String("Flame Pokémon");
+        System.out.println(poke.charAt(10));
+//        Assertions.assertEquals(poke.charAt(10),'\130');
+
+//        Assertions.assertEquals(tempPokemon1.equals("7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg"), true);
+        Assertions.assertEquals(tempPokemon1.Species.equals("Flame Pokémon"),true);
+//        Assertions.assertEquals(tempPokemon1.Species.equals("Flame PokÃ©mon"),true);
     }
 }

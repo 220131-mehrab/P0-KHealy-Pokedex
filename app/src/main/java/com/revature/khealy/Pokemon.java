@@ -18,14 +18,28 @@ public class Pokemon {
     String Weight;
 
     public Pokemon(Builder builder){
-
+        this.ID = builder.ID;
+        this.Number = builder.Number;
+        this.Name = builder.Name;
+        this.Type1 = builder.Type1;
+        this.Type2 = builder.Type2;
+        this.Total = builder.Total;
+        this.HP = builder.HP;
+        this.Atk = builder.Atk;
+        this.Def = builder.Def;
+        this.SpAtk = builder.SpAtk;
+        this.SpDef = builder.SpDef;
+        this.Spd = builder.Spd;
+        this.Species = builder.Species;
+        this.Height = builder.Height;
+        this.Weight = builder.Weight;
     }
 
     //ID,Number,Name,Type1,Type2,Total,HP,Atk,Def,SpAtk,SpDef,Spd,Species,Height,Wei
     String comma = new String(",");
     public String toString(){
-        return this.ID + comma + this.Number + comma+ this.Name + comma+
-                this.Type1 + comma+this.Type2 + comma+this.HP + comma+
+        return Integer.toString(this.ID) + comma + this.Number + comma+ this.Name + comma+
+                this.Type1 + comma+this.Type2 + comma + this.Total + this.HP + comma+
                 this.Atk + comma+ this.Def+ comma+ this.SpAtk+ comma+
                 this.SpDef + comma+ this.Spd + comma+
                 this.Species+ comma+ this.Height+ comma+ this.Weight;
