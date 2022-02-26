@@ -7,7 +7,7 @@ package com.revature.khealy;
 
 import java.lang.System;
 
-import org.checkerframework.checker.units.qual.A;
+import com.revature.khealy.Domain.Pokemon;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -46,10 +46,13 @@ public class AppTest {
         
         String poke = new String("Flame Pokémon");
         System.out.println(poke.charAt(10));
-//        Assertions.assertEquals(poke.charAt(10),'\130');
+//        Assertions.assertEquals(poke.charAt(9),'\130');
 
-//        Assertions.assertEquals(tempPokemon1.equals("7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg"), true);
-        Assertions.assertEquals(tempPokemon1.Species.equals("Flame Pokémon"),true);
+        Assertions.assertEquals("Charizard",tempPokemon1.getName());
+        Assertions.assertEquals(tempPokemon1.toString(),"7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg");
+//        Assertions.assertEquals(tempPokemon1.Species.equals("Flame Pokémon"),true);
+//        Assertions.assertEquals(tempPokemon1.Species,"Flame Pokémon");
 //        Assertions.assertEquals(tempPokemon1.Species.equals("Flame PokÃ©mon"),true);
     }
 }
+

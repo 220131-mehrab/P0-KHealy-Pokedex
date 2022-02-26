@@ -1,4 +1,4 @@
-package com.revature.khealy;
+package com.revature.khealy.Services;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

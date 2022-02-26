@@ -3,12 +3,11 @@
  */
 package com.revature.khealy;
 
+import com.revature.khealy.Dex.CSVPokedex;
+import com.revature.khealy.Dex.Dex;
+import com.revature.khealy.Services.DexService;
+import com.revature.khealy.Services.SearchFormService;
 import jakarta.servlet.Servlet;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.startup.Tomcat;
-
-import jakarta.servlet.Servlet;
-import jakarta.servlet.http.HttpServlet;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
@@ -20,7 +19,7 @@ public class App {
 
     public static void main(String[] args){
         //String filename = args[0];
-        Pokedex pokedex = new Pokedex(filename);
+        Dex pokedex = new CSVPokedex(filename);
         DexService dexService = new DexService(pokedex);
         SearchFormService sfService = new SearchFormService();
 

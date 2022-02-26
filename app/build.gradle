@@ -5,6 +5,22 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/7.3.3/userguide/building_java_projects.html
  */
+
+/*
+plugins {
+    id "application"
+}
+apply plugin : "java"
+ext {
+    javaMainClass = "com.baeldung.gradle.exec.MainClass"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+//--------------------------------------------------------------
+*/
+
 plugins {
     id 'application'
 }
@@ -17,7 +33,6 @@ application {
     //mainClass = 'Server.App'
     mainClassName = 'com.revature.khealy.App'
 }
-
 
 jar {
     manifest {
@@ -34,16 +49,32 @@ dependencies {
     //Tomcat
     implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.0-M10'
     // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
+
+    implementation 'org.wso2.orbit.com.h2database:h2:2.1.210.wso2v1'
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.210'
 }
 
+
+testing {
+    suites {
+        // Configure the built-in test suite
+        test {
+            // Use JUnit5 test framework
+            useJUnitJupiter('5.8.2')
+        }
+    }
+}
 
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+    useJUnitJupiter('5.8.2')
 }
+

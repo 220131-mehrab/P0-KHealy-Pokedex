@@ -1,52 +1,33 @@
-package com.revature.khealy;
+package com.revature.khealy.Dex;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import com.revature.khealy.Domain.Pokemon;
+
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Pokedex {
-
-
-    protected List<String> pokemonsAsStrings;
+public class CSVPokedex implements Dex {
     protected List<Pokemon> pokemons;
-    //private File file;
     private InputStream file;
 
-
-    public Pokedex(String filename) {
-        this.pokemonsAsStrings = new ArrayList<>();
-
+    public CSVPokedex(String filename) {
+        this.pokemons = new ArrayList<>();
         try {
-            //this.file = new FileInputStream("Server/app/src/main/java/Server/" + filename);
-            //File file = new File(filename);
             this.file = getClass().getClassLoader().getResourceAsStream(filename);
         } catch (Exception e) {
             System.out.println("Error");
             e.printStackTrace();
         }
-        loadAsStrings();
         load();
-    }
-
-    private void loadAsStrings() {
-
-        Scanner scanner = new Scanner(this.file, "UTF-8");
-        scanner.useDelimiter("\n");
-        while (scanner.hasNext()) {
-            this.pokemonsAsStrings.add(scanner.next());
-        }
-        scanner.close();
     }
 
     private void load(){
         String tempArray[];
         String pokeString = "";
 
-        Scanner scanner = new Scanner(this.file, "UTF-8");
+        Scanner scanner = new Scanner(this.file, StandardCharsets.UTF_8);
         scanner.useDelimiter("\n");
         while (scanner.hasNext()) {
             pokeString = scanner.next();
@@ -80,20 +61,34 @@ public class Pokedex {
         }
         scanner.close();
     }
-/*
-    public ArrayList<pokemon> getPokemons(){
-        return this.pokemons;
+
+    public ArrayList<Pokemon> getPokemons() {
+        return (ArrayList<Pokemon>) this.pokemons;
     }
-*/
-    public String getPokemon(String PokeName) {
+
+    @Override
+    public String getPokemon(String pokeName) {
         boolean found = false;
         String result = "";
-        for (String pokemon : this.pokemonsAsStrings){
-            if (pokemon.contains(PokeName) && !found){
-                result = pokemon;
-                found = true;
+        for (Pokemon pokemon : this.pokemons){
+            if (!found){
+                if (pokeName.equals(pokemon.getName())){
+                    result = pokemon.getName();
+                    found = true;
+                };
             }
         }
-        return result;
+        if (!found){
+            return null;
+        }
+        else {
+            return result;
+        }
     }
+
+
 }
+
+
+
+
