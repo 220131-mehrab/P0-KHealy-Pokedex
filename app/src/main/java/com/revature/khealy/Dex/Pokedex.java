@@ -3,6 +3,7 @@ package com.revature.khealy.Dex;
 import com.revature.khealy.Domain.Pokemon;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +26,7 @@ public class Pokedex implements StrDex  {
     }
 
     private void load() {
-        Scanner scanner = new Scanner(this.file, "UTF-8");
+        Scanner scanner = new Scanner(this.file, StandardCharsets.UTF_8);
         scanner.useDelimiter("\n");
         while (scanner.hasNext()) {
             String resultPokeString = scanner.next();

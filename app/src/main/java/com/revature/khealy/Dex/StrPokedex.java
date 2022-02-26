@@ -17,6 +17,7 @@ public class StrPokedex implements StrDex {
     StrPokedex (String filename){
         this.strPokemons = new ArrayList<>();
 
+
         try {
             this.file = getClass().getClassLoader().getResourceAsStream(filename);
         } catch (Exception e) {
