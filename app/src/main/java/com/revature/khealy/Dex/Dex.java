@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Dex {
-
     List<Pokemon> pokemons = null;
     InputStream file = null;
 
