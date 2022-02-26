@@ -1,4 +1,6 @@
-package com.revature.khealy;
+package com.revature.khealy.Domain;
+
+import java.util.Objects;
 
 public class Pokemon {
     int ID;
@@ -17,6 +19,9 @@ public class Pokemon {
     String Height;
     String Weight;
 
+    public Pokemon(){
+
+    }
     public Pokemon(Builder builder){
         this.ID = builder.ID;
         this.Number = builder.Number;
@@ -35,15 +40,18 @@ public class Pokemon {
         this.Weight = builder.Weight;
     }
 
+
+
     //ID,Number,Name,Type1,Type2,Total,HP,Atk,Def,SpAtk,SpDef,Spd,Species,Height,Wei
     String comma = new String(",");
     public String toString(){
-        return Integer.toString(this.ID) + comma + this.Number + comma+ this.Name + comma+
-                this.Type1 + comma+this.Type2 + comma + this.Total + this.HP + comma+
+        return this.ID + comma + this.Number + comma + this.Name + comma+
+                this.Type1 + comma+this.Type2 + comma + this.Total + comma + this.HP + comma+
                 this.Atk + comma+ this.Def+ comma+ this.SpAtk+ comma+
                 this.SpDef + comma+ this.Spd + comma+
-                this.Species+ comma+ this.Height+ comma+ this.Weight;
+                this.Species + comma+ this.Height+ comma+ this.Weight;
     }
+
 
 
     public static class Builder {
@@ -203,6 +211,29 @@ public class Pokemon {
 
     public String getWeight() {
         return Weight;
+    }
+
+    //of
+    public static Pokemon of() {
+        return new Pokemon();
+    }
+
+    //Object overrides
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pokemon pokemon = (Pokemon) o;
+        return ID == pokemon.ID && Name.equals(pokemon.Name) && Type1.equals(pokemon.Type1) && Type2.equals(pokemon.Type2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, Name, Type1,Type2);
+    }
+
+    public int compareTo(Pokemon o) {
+        return Integer.compare(this.ID, o.getID());
     }
 
 }

@@ -1,5 +1,7 @@
-package com.revature.khealy;
+package com.revature.khealy.Services;
 
+import com.revature.khealy.Dex.Dex;
+import com.revature.khealy.Dex.Pokedex;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServlet;
@@ -9,9 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DexService extends HttpServlet {
-    private Pokedex dexRepository;
+    private Dex dexRepository;
 
-    public DexService(Pokedex dexRepository) {
+    public DexService(Dex dexRepository) {
         this.dexRepository = dexRepository;
     }
 
