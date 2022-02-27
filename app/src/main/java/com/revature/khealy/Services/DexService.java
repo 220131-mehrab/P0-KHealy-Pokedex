@@ -2,6 +2,7 @@ package com.revature.khealy.Services;
 
 import com.revature.khealy.Dex.Dex;
 import com.revature.khealy.Dex.SQLPokedex;
+import com.revature.khealy.Domain.Pokemon;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServlet;
@@ -93,7 +94,7 @@ public class DexService extends HttpServlet {
                 "                   <meta charset='UTF-8' />" +
                 "                 </head>" +
                 "                <body>");
-            for (String pokemon : dexRepository.pokemonsAsStrings){
+            for (Pokemon pokemon : dexRepository.pokemons){
 //                resp.getWriter().println(toString(pokemon)+ "<br/>");
                 resp.getWriter().println(pokemon + "<br/>");
             }

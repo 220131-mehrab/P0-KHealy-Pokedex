@@ -27,13 +27,13 @@ public class AppTest {
          9,006,Charizard(Mega Charizard Y),Fire,Flying,634,78,104,78,159,115,100,Flame Pokémon,1.7 m,100.5 kg
         */
         Pokemon tempPokemon1 = new Pokemon.Builder().setID(7).setNumber("006").setName("Charizard").setType1("Fire").setType2("Flying")
-                .setTotal(534).setHP(78).setAtk(84).setDef(78).setSpAtk(109).setSpDef(85).setSpDef(100)
+                .setTotal(534).setHP(78).setAtk(84).setDef(78).setSpAtk(109).setSpDef(85).setSpd(100)
                 .setSpecies("Flame Pokémon").setHeight("1.7 m").setWeight("90.5 kg").build();
         Pokemon tempPokemon2 = new Pokemon.Builder().setID(8).setNumber("006").setName("Charizard(Mega Charizard X)").setType1("Fire").setType2("Dragon")
-                .setTotal(634).setHP(78).setAtk(130).setDef(111).setSpAtk(130).setSpDef(85).setSpDef(100)
+                .setTotal(634).setHP(78).setAtk(130).setDef(111).setSpAtk(130).setSpDef(85).setSpd(100)
                 .setSpecies("Flame Pokémon").setHeight("1.7 m").setWeight("110.5 kg").build();
         Pokemon tempPokemon3 = new Pokemon.Builder().setID(9).setNumber("006").setName("Charizard(Mega Charizard Y)").setType1("Fire").setType2("Flying")
-                .setTotal(634).setHP(78).setAtk(104).setDef(78).setSpAtk(159).setSpDef(115).setSpDef(100)
+                .setTotal(634).setHP(78).setAtk(104).setDef(78).setSpAtk(159).setSpDef(115).setSpd(100)
                 .setSpecies("Flame Pokémon").setHeight("1.7 m").setWeight("100.5 kg").build();
 
 
@@ -43,16 +43,19 @@ public class AppTest {
         System.out.println(tempPokemon2.toString());
         System.out.println(tempPokemon3.toString());
 
-        
+
         String poke = new String("Flame Pokémon");
         System.out.println(poke.charAt(10));
 //        Assertions.assertEquals(poke.charAt(9),'\130');
 
         Assertions.assertEquals("Charizard",tempPokemon1.getName());
-        Assertions.assertEquals(tempPokemon1.toString(),"7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg");
-//        Assertions.assertEquals(tempPokemon1.Species.equals("Flame Pokémon"),true);
-//        Assertions.assertEquals(tempPokemon1.Species,"Flame Pokémon");
-//        Assertions.assertEquals(tempPokemon1.Species.equals("Flame PokÃ©mon"),true);
+        Assertions.assertEquals("7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg",tempPokemon1.toString());
+        Assertions.assertEquals("8,006,Charizard(Mega Charizard X),Fire,Dragon,634,78,130,111,130,85,100,Flame Pokémon,1.7 m,110.5 kg",tempPokemon2.toString());
+        Assertions.assertEquals("9,006,Charizard(Mega Charizard Y),Fire,Flying,634,78,104,78,159,115,100,Flame Pokémon,1.7 m,100.5 kg",tempPokemon3.toString());
+
+        Assertions.assertEquals(tempPokemon1.getSpecies(),"Flame Pokémon");
+        Assertions.assertEquals(tempPokemon2.getSpecies(),"Flame Pokémon");
+        Assertions.assertEquals(tempPokemon1.getSpecies(),"Flame Pokémon");
     }
 }
 
