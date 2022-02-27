@@ -85,8 +85,6 @@ public class CSVPokedex implements Dex {
             return result;
         }
     }
-
-
 }
 
 

@@ -2,19 +2,16 @@ package com.revature.khealy.Dex;
 
 import com.revature.khealy.Domain.Pokemon;
 import java.sql.*;
-import javax.xml.transform.Result;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class SQLPokedex implements Dex  {
-    protected List<String> pokemons;
+    protected List<Pokemon> pokemons;
     private InputStream file;
 
     public SQLPokedex(String filename) {
@@ -27,32 +24,13 @@ public class SQLPokedex implements Dex  {
             e.printStackTrace();
         }
         load();
-
     }
 
     private void load() {
-        Scanner scanner = new Scanner(this.file, StandardCharsets.UTF_8);
-        scanner.useDelimiter("\n");
-        while (scanner.hasNext()) {
-            String resultPokeString = scanner.next();
-            this.pokemons.add(resultPokeString);
-        }
-        scanner.close();
-    }
-
-    @Override
-    public ArrayList<Pokemon> getPokemons() {
-        load();
-        return this.pokemons;
-    }
-
-
-    public String getPokemon(String pokeName) {
-        boolean found = false;
         Pokemon result = null;
         try{
             Connection conn = DriverManager.getConnection("jdbc:h2:~/test","Kevin",null);
-            String query = "SELECT * FROM POKEMON WHERE NAME = '" + pokeName + "'";
+            String query = "SELECT * FROM POKEMON";
             Statement statement = conn.createStatement();
             statement.execute(query);
             ResultSet resultSet = statement.getResultSet();
@@ -63,11 +41,51 @@ public class SQLPokedex implements Dex  {
                         .setType1(resultSet.getString("type1"))
                         .setType2(resultSet.getString("type2"))
                         .build();
+                this.pokemons.add(result);
             }
-
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public ArrayList<Pokemon> getPokemons() {
+        load();
+        return (ArrayList<Pokemon>) this.pokemons;
+    }
+
+    public String getPokemon(String pokeName) {
+        boolean found = false;
+        Pokemon result = null;
+        try{
+            if(!pokeName.contains("!@#$%^&**()_+-=|/*-+\"\':;")) {
+                Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "Kevin", null);
+                String query = "SELECT * FROM POKEMON WHERE NAME = '" + pokeName.toLowerCase() + "'";
+                Statement statement = conn.createStatement();
+                statement.execute(query);
+                ResultSet resultSet = statement.getResultSet();
+
+                while (resultSet.next() && (!found)) {
+                    result = new Pokemon.Builder()
+                            .setID(resultSet.getInt(0))
+                            .setName(resultSet.getString("name"))
+                            .setType1(resultSet.getString("type1"))
+                            .setType2(resultSet.getString("type2"))
+                            .build();
+                    found = true;
+                }
+                conn.close();
+            }
+            else{
+                throw new Exception ("exception");
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 
 

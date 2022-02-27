@@ -61,7 +61,7 @@ dependencies {
     testImplementation group: 'com.h2database', name: 'h2', version: '2.1.210'
 }
 
-
+/*
 testing {
     suites {
         // Configure the built-in test suite
@@ -72,9 +72,15 @@ testing {
     }
 }
 
-/*
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitJupiter('5.8.2')
 }
 */
+
+tasks.named('test'){
+    test {
+        useJUnitPlatform()
+    }
+}
