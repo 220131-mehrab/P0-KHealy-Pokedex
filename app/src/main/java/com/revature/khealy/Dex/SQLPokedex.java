@@ -30,16 +30,28 @@ public class SQLPokedex implements Dex  {
         Pokemon result = null;
         try{
             Connection conn = DriverManager.getConnection("jdbc:h2:~/test","Kevin",null);
-            String query = "SELECT * FROM POKEMON";
+            String query = "SELECT * FROM POKEDEX";
             Statement statement = conn.createStatement();
             statement.execute(query);
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()){
+                //ID,Number,Name,Type1,Type2,Total,HP,Atk,Def,SpAtk,SpDef,Spd,Species,Height,Weight
                 result = new Pokemon.Builder()
-                        .setID(resultSet.getInt(0))
+                        .setID(resultSet.getInt("id"))
+                        .setNumber(resultSet.getString("number"))
                         .setName(resultSet.getString("name"))
                         .setType1(resultSet.getString("type1"))
                         .setType2(resultSet.getString("type2"))
+                        .setTotal(resultSet.getInt("total"))
+                        .setHP(resultSet.getInt("hp"))
+                        .setAtk(resultSet.getInt("atk"))
+                        .setDef(resultSet.getInt("def"))
+                        .setSpAtk(resultSet.getInt("spatk"))
+                        .setSpDef(resultSet.getInt("spdef"))
+                        .setSpd(resultSet.getInt("spd"))
+                        .setSpecies(resultSet.getString("species"))
+                        .setHeight(resultSet.getString("height"))
+                        .setWeight(resultSet.getString("weight"))
                         .build();
                 this.pokemons.add(result);
             }
@@ -60,20 +72,33 @@ public class SQLPokedex implements Dex  {
         Pokemon result = null;
         try{
             if(!pokeName.contains("!@#$%^&**()_+-=|/*-+\"\':;")) {
+                System.out.println("starting connection");
                 Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "Kevin", null);
-                String query = "SELECT * FROM POKEMON WHERE NAME = '" + pokeName.toLowerCase() + "'";
+                String query = "SELECT * FROM POKEDEX WHERE NAME = '" + pokeName + "'";
                 Statement statement = conn.createStatement();
                 statement.execute(query);
                 ResultSet resultSet = statement.getResultSet();
 
                 while (resultSet.next() && (!found)) {
                     result = new Pokemon.Builder()
-                            .setID(resultSet.getInt(0))
+                            .setID(resultSet.getInt("id"))
+                            .setNumber(resultSet.getString("number"))
                             .setName(resultSet.getString("name"))
                             .setType1(resultSet.getString("type1"))
                             .setType2(resultSet.getString("type2"))
+                            .setTotal(resultSet.getInt("total"))
+                            .setHP(resultSet.getInt("hp"))
+                            .setAtk(resultSet.getInt("atk"))
+                            .setDef(resultSet.getInt("def"))
+                            .setSpAtk(resultSet.getInt("spatk"))
+                            .setSpDef(resultSet.getInt("spdef"))
+                            .setSpd(resultSet.getInt("spd"))
+                            .setSpecies(resultSet.getString("species"))
+                            .setHeight(resultSet.getString("height"))
+                            .setWeight(resultSet.getString("weight"))
                             .build();
                     found = true;
+                    System.out.println(result);
                 }
                 conn.close();
             }
