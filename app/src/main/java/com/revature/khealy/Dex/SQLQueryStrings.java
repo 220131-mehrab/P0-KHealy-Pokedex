@@ -70,23 +70,23 @@ public class SQLQueryStrings {
         "ALTER TABLE POKEDEX DROP COLUMN TYPE1; " +
         "ALTER TABLE POKEDEX DROP COLUMN TYPE2; ";
 
-    String seeNormalizedTableAsAWhole = "--see Normalized table as a whole (WORKS NO2) " +
-        "SELECT ID, NUMBER, TYPES.TYPENAME TYPE1, TYPE1ID, TYPES.TYPENAME TYPE2, TYPE2ID, TOTAL, " +
-        "HP, " +
-        "Atk, " +
-        "Def, " +
-            "SpAtk, " +
-            "SpDef, " +
-            "Spd, " +
-            "Species, " +
-            "Height, " +
-            "Weight " +
-        "FROM POKEDEX LEFT JOIN TYPES ON TYPES.TYPENAME = POKEDEX.TYPE1 LEFT JOIN TYPES2 ON TYPES2.TYPENAME = POKEDEX.TYPE2";
+    String seeNormalizedTableAsAWhole = "--A)see Normalized table as a whole (WORKS NO2) \n" +
+            "        SELECT ID, NUMBER, NAME, TYPES.TYPENAME TYPE1, TYPES2.TYPENAME TYPE2, TOTAL,\n" +
+            "        HP,\n" +
+            "        Atk,\n" +
+            "        Def,\n" +
+            "        SpAtk,\n" +
+            "        SpDef,\n" +
+            "        Spd,\n" +
+            "        Species,\n" +
+            "        Height, \n" +
+            "        Weight\n" +
+            "        FROM POKEDEX LEFT JOIN TYPES ON TYPES.TYPEID = POKEDEX.TYPE1ID LEFT JOIN TYPES2 ON TYPES2.TYPEID = POKEDEX.TYPE2ID;";
 
-public String initializeDatabase = "--1)READ IN FROM CSV " +
-    "DROP TABLE POKEMON IF EXISTS; " +
-    "DROP TABLE POKEDEX IF EXISTS; " +
-    "DROP TABLE TYPES IF EXISTS; " +
+    public String initializeDatabase = "--1)READ IN FROM CSV " +
+            "DROP TABLE POKEMON IF EXISTS; " +
+            "DROP TABLE POKEDEX IF EXISTS; " +
+            "DROP TABLE TYPES IF EXISTS; " +
     "DROP TABLE TYPES2 IF EXISTS; " +
     "CREATE TABLE POKEDEX( " +
     "        ID INT PRIMARY KEY, " +
