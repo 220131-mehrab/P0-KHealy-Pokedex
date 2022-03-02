@@ -76,7 +76,8 @@ public class SQLPokedex implements Dex  {
         Pokemon result = null;
         try{
 //            Connection conn = DriverManager.getConnection("jdbc:h2:~/test","Kevin",null);
-            String query = sqlQueryStrings.seeNormalizedTableAsAWhole;
+            String query = "select * from pokedex";
+//                    sqlQueryStrings.seeNormalizedTableAsAWhole;
             Statement statement = conn.createStatement();
             statement.execute(query);
             ResultSet resultSet = statement.getResultSet();

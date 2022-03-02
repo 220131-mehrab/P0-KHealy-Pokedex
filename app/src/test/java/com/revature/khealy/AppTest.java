@@ -58,7 +58,7 @@ public class AppTest {
         SQLPokedex sqlPokedex = new SQLPokedex();
         String result = sqlPokedex.getPokemon("Charizard");
 
-//        Assertions.assertEquals("Charizard",result);
+        Assertions.assertEquals("Charizard",result);
 //        test failed becuase SQL uses a different char set.  This is in spite of pasting pokemon strings in tests lines 52 to 59 above.
 //        Assertions.assertEquals("7,006,Charizard,Fire,Flying,534,78,84,78,109,85,100,Flame Pokémon,1.7 m,90.5 kg",result);
     }
@@ -69,6 +69,7 @@ public class AppTest {
         //InputStream file = getClass().getClassLoader().getResourceAsStream("npd.cvs");
         SQLPokedex sqlPokedex = new SQLPokedex();
         sqlPokedex.createFromCSV(sqlPokedex.conn);
+        //String poke = sqlPokedex.getpokemon("Charizard")
         pokemon = sqlPokedex.getPokemonObject("Charizard");
         Assertions.assertEquals("Charizard",pokemon.getName());
     }
