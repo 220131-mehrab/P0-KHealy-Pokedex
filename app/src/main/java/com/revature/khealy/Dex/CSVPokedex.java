@@ -75,7 +75,7 @@ public class CSVPokedex implements Dex {
                 if (pokeName.equals(pokemon.getName())){
                     result = pokemon.getName();
                     found = true;
-                };
+                }
             }
         }
         if (!found){
