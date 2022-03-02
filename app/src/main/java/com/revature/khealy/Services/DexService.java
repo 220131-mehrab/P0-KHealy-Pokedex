@@ -1,7 +1,7 @@
 package com.revature.khealy.Services;
 
 import com.revature.khealy.Dex.Dex;
-import com.revature.khealy.Dex.SQLPokedex;
+//import com.revature.khealy.Dex.SQLPokedex;
 import com.revature.khealy.Domain.Pokemon;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletResponse;

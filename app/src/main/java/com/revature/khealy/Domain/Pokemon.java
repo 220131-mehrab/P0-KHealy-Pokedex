@@ -45,11 +45,11 @@ public class Pokemon {
     //ID,Number,Name,Type1,Type2,Total,HP,Atk,Def,SpAtk,SpDef,Spd,Species,Height,Wei
     String comma = new String(",");
     public String toString(){
-        return this.ID + comma + this.Number + comma + this.Name + comma+
-                this.Type1 + comma+this.Type2 + comma + this.Total + comma + this.HP + comma+
+        return this.ID + comma + this.Number.trim() + comma + this.Name.trim() + comma+
+                this.Type1.trim() + comma + this.Type2.trim() + comma + this.Total + comma + this.HP + comma+
                 this.Atk + comma+ this.Def+ comma+ this.SpAtk+ comma+
                 this.SpDef + comma+ this.Spd + comma+
-                this.Species + comma+ this.Height+ comma+ this.Weight;
+                this.Species.trim() + comma+ this.Height.trim() + comma + this.Weight.trim();
     }
 
 

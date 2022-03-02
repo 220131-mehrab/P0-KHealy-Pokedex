@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SQLPokedex implements Dex  {
     protected List<Pokemon> pokemons;
     private InputStream file;
@@ -19,9 +20,9 @@ public class SQLPokedex implements Dex  {
     public Connection conn = null;
     public SQLQueryStrings sqlQueryStrings = new SQLQueryStrings();
     public ResultSet resultSet = null;
+
     /**
-     * Constructor with filename
-     * @param filename: an InputStream of the csv file
+     * Constructor
      */
     public SQLPokedex() {
         this.pokemons = new ArrayList<>();
@@ -38,7 +39,8 @@ public class SQLPokedex implements Dex  {
         }
     }
 
-    /**
+
+/**
      * This method creates a database from a csv file
      * @param conn: a connection to the database
      */
@@ -68,10 +70,12 @@ public class SQLPokedex implements Dex  {
         }
     }
 
+
     /**
      * This method takes in a connection and loads the database
      * @param conn
      */
+
     private void load(Connection conn) {
         Pokemon result = null;
         try{
@@ -86,8 +90,8 @@ public class SQLPokedex implements Dex  {
                         .setID(resultSet.getInt("id"))
                         .setNumber(resultSet.getString("number"))
                         .setName(resultSet.getString("name"))
-                        //.setType1(resultSet.getString("type1"))
-                        //.setType2(resultSet.getString("type2"))
+                        .setType1(resultSet.getString("type1"))
+                        .setType2(resultSet.getString("type2"))
                         .setTotal(resultSet.getInt("total"))
                         .setHP(resultSet.getInt("hp"))
                         .setAtk(resultSet.getInt("atk"))
@@ -107,24 +111,28 @@ public class SQLPokedex implements Dex  {
         }
     }
 
-    /**
+
+/**
      * Arraylist<Pokemon> getPokemons(): this method loads the pokemons from the
      * database, then returns the list
      * @return Arraylist<Pokemon>
      *
      */
+
     @Override
     public ArrayList<Pokemon> getPokemons() {
         load(conn);
         return (ArrayList<Pokemon>) this.pokemons;
     }
 
-    /**
+
+/**
      * getPokemon(String ):  This method takes a stirng and searches
      * for it in the sql database.
      * @param pokeName:  A Pokeman name as a string to search for
      * @return a result converted to a string
      */
+
     public String getPokemon(String pokeName) {
         boolean found = false;
         Pokemon result = null;
@@ -133,9 +141,12 @@ public class SQLPokedex implements Dex  {
             if(!pokeName.contains("!@#$%^&**()_+-=|/*-+\"\':;")) {
                 System.out.println("starting connection");
                 Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "Kevin", null);
-                String query = "SELECT * FROM POKEDEX WHERE NAME = '" + pokeName + "'";
+                String query = sqlQueryStrings.seeNormalizedTableAsAWholeMeth(pokeName);
+                System.out.println(query);
                 Statement statement = conn.createStatement();
+                System.out.println("Starting query");
                 statement.execute(query);
+                System.out.println("Finishing query.");
                 ResultSet resultSet = statement.getResultSet();
 
                 while (resultSet.next() && (!found)) {
@@ -173,11 +184,13 @@ public class SQLPokedex implements Dex  {
     }
 
 
-    /**
+
+/**
      * Return the first Pokemon Object that matches.
      * @param pokeName
      * @return
      */
+
     public Pokemon getPokemonObject(String pokeName) {
         boolean found = false;
         Pokemon result = null;
@@ -225,3 +238,4 @@ public class SQLPokedex implements Dex  {
         return result;
     }
 }
+

@@ -70,6 +70,10 @@ public class SQLQueryStrings {
         "ALTER TABLE POKEDEX DROP COLUMN TYPE1; " +
         "ALTER TABLE POKEDEX DROP COLUMN TYPE2; ";
 
+    public String seeNormalizedTableAsAWholeMeth(String pokeName){
+        return seeNormalizedTableAsAWhole + "WHERE POKEDEX.NAME = '" + pokeName + "'";
+    };
+
     String seeNormalizedTableAsAWhole = "--A)see Normalized table as a whole (WORKS NO2) \n" +
             "        SELECT ID, NUMBER, NAME, TYPES.TYPENAME TYPE1, TYPES2.TYPENAME TYPE2, TOTAL,\n" +
             "        HP,\n" +
@@ -81,7 +85,7 @@ public class SQLQueryStrings {
             "        Species,\n" +
             "        Height, \n" +
             "        Weight\n" +
-            "        FROM POKEDEX LEFT JOIN TYPES ON TYPES.TYPEID = POKEDEX.TYPE1ID LEFT JOIN TYPES2 ON TYPES2.TYPEID = POKEDEX.TYPE2ID;";
+            "        FROM POKEDEX LEFT JOIN TYPES ON TYPES.TYPEID = POKEDEX.TYPE1ID LEFT JOIN TYPES2 ON TYPES2.TYPEID = POKEDEX.TYPE2ID ";
 
     public String initializeDatabase = "--1)READ IN FROM CSV " +
             "DROP TABLE POKEMON IF EXISTS; " +
@@ -132,10 +136,8 @@ public class SQLQueryStrings {
     "INSERT INTO TYPES (TYPEID, TYPENAME) VALUES (17,'Rock'); " +
     "INSERT INTO TYPES (TYPEID, TYPENAME) VALUES (18,'Steel'); " +
     "INSERT INTO TYPES (TYPEID, TYPENAME) VALUES (19,'Water'); " +
-
 "--3)COPYING OF TABLE TYPES TO TYPES2 " +
     "CREATE TABLE TYPES2 AS SELECT * FROM TYPES; " +
-
 "--4)THE CREATING OF POKEDEX TABLE, NORMALIZED " +
     "ALTER TABLE POKEDEX ADD COLUMN (TYPE1ID INTEGER); " +
     "ALTER TABLE POKEDEX ADD FOREIGN KEY (TYPE1ID) REFERENCES TYPES(TYPEID); " +
@@ -145,6 +147,9 @@ public class SQLQueryStrings {
     "UPDATE POKEDEX SET TYPE2ID=(SELECT TYPEID FROM TYPES2 WHERE TYPES2.TYPENAME  = TYPE2); " +
     "ALTER TABLE POKEDEX DROP COLUMN TYPE1; " +
     "ALTER TABLE POKEDEX DROP COLUMN TYPE2; ";
+
+
+
 }
 
 
