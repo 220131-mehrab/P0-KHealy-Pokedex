@@ -53,7 +53,12 @@ public class AppTest {
 //        Assertions.assertEquals(tempPokemon3.getSpecies(), "Flame Pokémon");
     }
 
-
+    @Test
+    public void SQLGetPokemonObjectTest(){
+        SQLPokedex sqlPokedex = new SQLPokedex();
+        Pokemon result = sqlPokedex.getPokemonObject("Charizard");
+        Assertions.assertEquals("Charizard",result.getName());
+    }
 
     @Test
     public void SQLGetPokemonTest(){
